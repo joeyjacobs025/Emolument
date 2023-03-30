@@ -62,6 +62,7 @@ import datetime
 from datetime import datetime
 from datetime import timedelta
 import operator
+from operator import itemgetter
 
 stocks = ['AOS',
 "	ABT	",
@@ -562,11 +563,11 @@ stocks = ['AOS',
 "	ZTS	"]
 
 
-dictionary = {}
-
+test_dict = {}
+counter = 0
 
 for stock in stocks:
-
+    counter = counter + 1
     score = 0
     
 
@@ -637,81 +638,81 @@ for stock in stocks:
             
     
     
-    # # # compares P/E ratios by sector
-    # stock_data = yf.Ticker(stock)
-    # stockSector = stock_data.info['sector']
-    # stockPE = stock_data.info['forwardPE']
+    # # compares P/E ratios by sector
+    stock_data = yf.Ticker(stock).info
+    stockSector = stock_data.get('sector')
+    stockPE = stock_data.get('forwardPE')
     
-    # # P/E ratios
-    # consumerd_PE = 22.914
-    # comm_PE = 17.13
-    # consumers_PE = 19.80
-    # energy_PE = 10.24
-    # financials_PE = 12.55
-    # healthcare_PE = 22.32
-    # industrials_PE = 18.84
-    # infoTech_PE = 24.40
-    # materials_PE = 8.19
-    # realEstate_PE = 21.74
-    # utilities_PE = 21.99
+    # P/E ratios
+    consumerd_PE = 22.914
+    comm_PE = 17.13
+    consumers_PE = 19.80
+    energy_PE = 10.24
+    financials_PE = 12.55
+    healthcare_PE = 22.32
+    industrials_PE = 18.84
+    infoTech_PE = 24.40
+    materials_PE = 8.19
+    realEstate_PE = 21.74
+    utilities_PE = 21.99
     
-    # margin_low = 0.9
-    # margin_high = 1.1
+    margin_low = 0.9
+    margin_high = 1.1
     
-    # if stockSector == 'consumer discretionary':  
-    #     if consumerd_PE*margin_low < stockPE: 
-    #         if stockPE < consumerd_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'consumer discretionary':  
+        if consumerd_PE*margin_low < stockPE: 
+            if stockPE < consumerd_PE*margin_high:
+                score = score + 10
         
-    # if stockSector == 'communication services':
-    #     if comm_PE*margin_low < stockPE:
-    #         if stockPE < comm_PE*margin_high :
-    #             score = score + 10
+    if stockSector == 'communication services':
+        if comm_PE*margin_low < stockPE:
+            if stockPE < comm_PE*margin_high :
+                score = score + 10
      
-    # if stockSector == 'consumer staples':
-    #     if consumers_PE*margin_low < stockPE:
-    #         if stockPE < consumers_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'consumer staples':
+        if consumers_PE*margin_low < stockPE:
+            if stockPE < consumers_PE*margin_high:
+                score = score + 10
     
-    # if stockSector == 'energy':
-    #     if energy_PE*margin_low < stockPE:
-    #         if stockPE < energy_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'energy':
+        if energy_PE*margin_low < stockPE:
+            if stockPE < energy_PE*margin_high:
+                score = score + 10
     
-    # if stockSector == 'financials':
-    #     if financials_PE*margin_low < stockPE:
-    #         if stockPE < financials_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'financials':
+        if financials_PE*margin_low < stockPE:
+            if stockPE < financials_PE*margin_high:
+                score = score + 10
     
-    # if stockSector == 'healthcare':
-    #     if healthcare_PE*margin_low < stockPE:
-    #         if stockPE < healthcare_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'healthcare':
+        if healthcare_PE*margin_low < stockPE:
+            if stockPE < healthcare_PE*margin_high:
+                score = score + 10
     
-    # if stockSector == 'industrials':
-    #     if industrials_PE*margin_low < stockPE:
-    #         if stockPE < industrials_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'industrials':
+        if industrials_PE*margin_low < stockPE:
+            if stockPE < industrials_PE*margin_high:
+                score = score + 10
     
-    # if stockSector == 'information technology':
-    #     if infoTech_PE*margin_low < stockPE:
-    #         if stockPE < infoTech_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'information technology':
+        if infoTech_PE*margin_low < stockPE:
+            if stockPE < infoTech_PE*margin_high:
+                score = score + 10
     
-    # if stockSector == 'materials':
-    #     if materials_PE*margin_low < stockPE:
-    #         if stockPE < materials_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'materials':
+        if materials_PE*margin_low < stockPE:
+            if stockPE < materials_PE*margin_high:
+                score = score + 10
     
-    # if stockSector == 'real estate':
-    #     if realEstate_PE*margin_low < stockPE:
-    #         if stockPE < realEstate_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'real estate':
+        if realEstate_PE*margin_low < stockPE:
+            if stockPE < realEstate_PE*margin_high:
+                score = score + 10
     
-    # if stockSector == 'utilities':
-    #     if utilities_PE*margin_low < stockPE:
-    #         if stockPE < utilities_PE*margin_high:
-    #             score = score + 10
+    if stockSector == 'utilities':
+        if utilities_PE*margin_low < stockPE:
+            if stockPE < utilities_PE*margin_high:
+                score = score + 10
     
         
     import yfinance as yf
@@ -770,12 +771,17 @@ for stock in stocks:
     
     score = score + closeScore + openScore + lowScore + highScore
 
+    print("Stock " + str(counter) + " of 496")
    
-    result = {**dictionary, **{stock: score}}  
-    print(result)
+    result = {**test_dict, **{stock: score}}  
+    test_dict.update(result)
     
+    
+N = 5
 
-maximum = max(result, key=result.get(0))
-print(maximum)
+res = dict(sorted(test_dict.items(), key = itemgetter(1), reverse = True)[:N])
+ 
+# printing result
+print("The top stocks are " + str(res))
 
 
