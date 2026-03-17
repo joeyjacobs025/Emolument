@@ -18,7 +18,7 @@ Features:
 
 Applied Data Science Tools: Uses pandas, numpy, statsmodels, and yfinance for data retrieval, manipulation, and analysis.
 
-Technologies
+Technologies:
   
   Python
   
